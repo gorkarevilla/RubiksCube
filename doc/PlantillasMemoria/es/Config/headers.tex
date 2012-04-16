@@ -1,0 +1,14 @@
+\pagestyle{fancy}                                % elegir este estilo de cpps (recomendado)
+\fancyhf{}                                       % borra el estilo anterior para cpps, para luego redefinirlos
+\fancyhead[LE,RO]{\textbf{\thepage}}             % Cabecera: número de página en negrita.
+
+\fancyhead[RE]{\nouppercase{\leftmark}}          % Cabecera: incluye información del nivel superior (Capítulo)
+                                                 % a la derecha (R) de las páginas pares (E), evitando escribir
+						 % todo en mayúsculas (que sería la opción por defecto).
+
+\fancyhead[LO]{\nouppercase{\rightmark}}         % Cabecera: incluyer información del nivel inferior (Sección)
+                                                 % a la izquierda (L) de las páginas impares (O), evitando escribir
+						 % todo en mayúsculas (que sería la opción por defecto).
+
+\renewcommand{\headrulewidth}{0.5pt}             % Cabecera: subraya la cabecera (fijar en "0pt" si no se desea).
+\renewcommand{\footrulewidth}{0pt}               % Pié: subraya el pie de página (fijar en "0pt" si no se desea).

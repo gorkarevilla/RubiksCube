@@ -1,0 +1,9 @@
+.bordeTabla { BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid; BORDER-COLOR: #000000; }
+.portadaTitulo { FONT-SIZE: 20px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; FONT-WEIGHT: bold; }
+.paginaSubtitulo { FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; FONT-WEIGHT: bold; }
+.paginaTitulo { FONT-SIZE: 16px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; FONT-WEIGHT: bold; }
+.paginaTexto { FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; }
+.paginaTexto8 { FONT-SIZE: 8px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; }
+.lineaCelda { FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BORDER-TOP: 0px solid; BORDER-RIGHT: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid; BORDER-COLOR: #000000 }
+BODY { BACKGROUND-COLOR: #FFFFFF; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; FONT-SIZE: 10pt; SCROLLBAR-TRACK-COLOR: #6666CC; SCROLLBAR-SHADOW-COLOR: #333366; SCROLLBAR-HIGHLIGHT-COLOR: #9999CC; SCROLLBAR-FACE-COLOR: #3333CC; SCROLLBAR-DARKSHADOW-COLOR: #000066; SCROLLBAR-3DLIGHT-COLOR: #6666CC; SCROLLBAR-ARROW-COLOR: #F7941D; }
+

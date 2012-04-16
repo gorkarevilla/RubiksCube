@@ -1,0 +1,115 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                          %
+%  Plantilla para Proyecto Fin de Carrera  %
+%                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+% CONFIG: Definición del estilo del documento
+%
+
+\documentclass[a4paper,12pt]{itsas_pfc}
+
+%
+% CONFIG: Fichero con configuración opcional
+%
+
+\input{Config/pfc_options.tex}
+
+%
+% Comienza el documento en sí
+%
+
+\begin{document}
+
+%
+% CONFIG: dar valores a ciertas variables
+%
+
+\input{Config/rename.tex}
+
+%         
+% CONTENIDO: Página de portada
+%         
+
+\input{Config/cover.tex}
+
+%
+% CONFIG: Inicializar en 1 el número de página
+%
+
+\input{Config/begin.tex}
+
+%
+% CONTENIDO: Si deseas incluir agradecimientos/citas/prefacios...
+%
+
+\input{file-acknowledgements.tex} % agradecimientos
+\input{file-preface.tex}          % prefacio
+
+%
+% CONFIG: Índice de materias (ToC)
+% 
+
+\input{Config/toc.tex}
+
+%
+% CONFIG: Definir el estilo de las cabeceras/piés de página.
+%
+
+\input{Config/headers.tex}
+
+%
+% CONTENT: Resumen (si hay alguno)
+%
+
+\input{file-abstract.tex}
+
+%
+% CONFIG: Estilo de los capítulos
+%
+
+\input{Config/chapters.tex}
+
+%
+% CONTENIDO: Tras esto puedes incluir todos los capítulos/secciones que desees.
+%
+
+\input{file-chapter1.tex} % Capítulo 1
+\input{file-chapter2.tex} % Capítulo 2
+
+%
+% CONFIG: Estilo de los apéndices
+%
+
+\input{Config/appendices.tex}
+
+%
+% CONTENIDO: Apéndices, si se desean.
+%
+
+\input{file-appendix1.tex} % Apéndice I
+
+%
+% CONFIG: Estilo de la bibliografía
+%
+
+\input{Config/bibliography.tex}
+
+%
+% CONTENIDO: Bibliografia. Introduce una lista de ficheros .bib que quieras usar, como se expone.
+%
+
+\bibliography{file-bibliography,file-bibliography2}
+
+%
+% CONTENIDO: Lista de publicaciones:
+%
+
+\input{file-publications.tex}
+
+%
+% Aquí acaba todo
+%
+
+\end{document}

@@ -1,0 +1,77 @@
+%
+% Paquetes que pueden serte de utilidad (rec = recomendado, opc = opcional)
+%
+\usepackage{fancyhdr}          % (rec)  permite cambiar varios parámetros de las cabeceras y piés de página
+\usepackage{courier}           % (opc)  usa esta fuente por defecto
+\usepackage{setspace}          % (opc)  permite cambiar el espaciado entre líneas
+\usepackage{longtable}         % (opc)  permite que las tablas ocupen varias páginas
+\usepackage{lscape}            % (opc)  permite el uso del comando \landscape, para poner algo apaisado
+\usepackage{color}             % (opc)  varios comandos relativos al color (como \color)
+\usepackage{rotating}          % (opc)  permite rotar PSs y EPSs
+\usepackage{textcomp}          % (opc)  permite incluir el símbolo del euro, con \texteuro
+\usepackage{minitoc}           % (opc)  permite incluir ToCs (índice de materias) para cada capítulo
+\usepackage{epsf}              % (opc)  permite ciertas manipulaciones a EPSs
+\usepackage[absolute]{textpos} % (rec)  permite posicionado arbitrario de texto (necesario para la portada)
+\usepackage{srcltx}            % (opc)  permite pasar del .dvi al .tex
+\usepackage[spanish5]{babel}   % (rec)  da soporte para castellano a LaTeX
+\usepackage[latin1]{inputenc}  % (opc)  permite introducir caracteres como á, etc, en el input
+
+%
+% Settings para los márgenes. Descomenta y modifica si sabes lo que haces. Nótese
+% que a los valores dados se les añade una pulgada extra. Los valores dados son los
+% predeterminados para papel A4 y el estilo itsas_pfc.cls.
+%
+%\setlength{\oddsidemargin}{10pt}     % márgen izquierdo para páginas impares (izquierda)
+%\setlength{\evensidemargin}{52pt}    % márgen izquierdo para páginas pares (derecha)
+%\setlength{\textwidth}{390pt}        % anchura del cuerpo de texto
+
+%
+% Recomendado para mejorar la colocación automática de las figuras.
+% (tomado de http://dcwww.camp.dtu.dk/~schiotz/comp/LatexTips/LatexTips.html#captfont)
+%
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+
+%
+% Espacio entre el borde superior de la página y donde comienza el texto (ahí van las
+% cabeceras). LaTeX se queja si usamos el paquete fanchyhdr y headheight es menor de 15pt
+%
+\headheight 15pt
+
+%
+% Para el paquete textpos (usado para la portada)
+%
+\setlength{\TPHorizModule}{\paperwidth}
+\setlength{\TPVertModule}{\paperheight}
+\newcommand{\tb}[4]{\begin{textblock}{#1}[0.5,0.5](#2,#3)\begin{center}#4\end{center}\end{textblock}}
+
+%
+% Aquí puedes definir tus comandos.
+% 
+% \newcommand{cmd}[args]{def}
+%
+% cmd  = el comando a definir (p.e. \cadena)
+% args = el número de argumentos
+% def  = la definición, sustituyendo #1, #2... por el primer, segundo... argumento
+%
+% Por ejemplo:
+%
+% \newcommand{\agua}[1]{H\ensuremath{_#1}O}
+%
+% Cada vez que escribamos "\agua{33}", en el output saldrá: "H33O" (con el 33 como subíndice)
+%
+
+%\newcommand{\algo}{algo}
+
+%
+% Aquí puedes instruir a LaTeX de por dónde cortar las palabras que él automáticamente
+% no sepa. P.e., para cortar "gnomonly" solo por donde se señala con guiones (-).
+%
+\hyphenation{gno-mon-ly} 
+ 
+%
+% Que las primeras páginas sean numeradas con números romanos.
+% Más adelante se cambiará de nuevo a arábicos.
+%
+\pagenumbering{Roman}

@@ -1,0 +1,46 @@
+\tocchapter{Primer capítulo}
+
+Este es el primer cap\'{\i}tulo.
+
+\section{Primera sección}
+
+Esta es la primera secci\'{o}n del primer cap\'{\i}tulo.
+
+Ver\'{a}s que los p\'{a}rrafos comienzan indentados, como por ejemplo este mismo p\'{a}rrafo est\'{a} indentado, como puedes ver.
+
+\noindent Puedes evitar la indentaci\'{o}n con \verb#\noindent#. Por ejemplo, esta l\'{\i}nea.
+
+\noindent Ejemplo de lista de \'{\i}tems:
+
+\begin{itemize}
+ \item Esta es una cita de ejemplo\cite{yo:07} (del fichero de bibliograf\'{a} \textit{file-bibliography.bib}).
+ \item Esta es otra cita\cite{yo:08} (del fichero \textit{file-bibliography2.bib}).
+ \item Ver Tabla~\ref{tab}.
+ \item Ver Figura~\ref{fig}.
+ \item Ver Eq.~\ref{eq}
+\end{itemize}
+
+\begin{table}[hbt]
+ \begin{center}
+ \begin{tabular}{cc}
+  a & b \\
+  c & d 
+ \end{tabular}
+ \end{center}
+ \caption{Esto es una tabla.}
+ \label{tab}
+\end{table}
+
+\begin{figure}[hbt]
+ \begin{center}
+  % Descomentar la línea siguiente, cambiando FILENAME por el nombre del fichero (E)PS
+  %\includegraphics[width=1.0\cw]{FILENAME.eps}
+ \end{center}
+ \caption{Esta figura est\'{a} vac\'{\i}a.}
+ \label{fig}
+\end{figure}
+
+\begin{equation}
+  1 + 1 = 7
+ \label{eq}
+\end{equation}
