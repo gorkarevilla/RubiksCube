@@ -14,7 +14,7 @@
  * 
  */
 
-package es.ehu;
+package com.gorkarevilla;
 
 public class ReferenciaCubito {
 	public int _x;

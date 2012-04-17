@@ -14,7 +14,7 @@
  * 
  */
 
-package es.ehu;
+package com.gorkarevilla;
 
 import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLU;

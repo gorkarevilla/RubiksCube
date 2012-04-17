@@ -14,7 +14,7 @@
  * 
  */
 
-package es.ehu;
+package com.gorkarevilla;
 
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
