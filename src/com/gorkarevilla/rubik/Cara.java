@@ -21,7 +21,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-import es.ehu.R;
+
 
 
 public class Cara {
