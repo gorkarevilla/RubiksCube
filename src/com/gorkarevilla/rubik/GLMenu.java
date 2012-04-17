@@ -14,7 +14,7 @@
  * 
  */
 
-package com.gorkarevilla;
+package com.gorkarevilla.rubik;
 
 import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLU;

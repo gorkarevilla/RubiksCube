@@ -14,7 +14,7 @@
  * 
  */
 
-package com.gorkarevilla;
+package com.gorkarevilla.rubik;
 
 import android.app.Activity;
 import android.opengl.GLSurfaceView;

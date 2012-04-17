@@ -14,7 +14,7 @@
  * 
  */
 
-package com.gorkarevilla;
+package com.gorkarevilla.rubik;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
