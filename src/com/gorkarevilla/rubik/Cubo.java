@@ -88,8 +88,9 @@ public class Cubo {
 	 * referencia a los cubitos.
 	 * 
 	 */
-	public Cubo ()
+	public Cubo (int dimension)
 	{
+		_dimension = dimension;
 		_cubos= new GLCubito[_dimension][_dimension][_dimension];
 
 		_ArrayReferenciaCubitos = new ReferenciaCubito[_dimension][_dimension][_dimension];

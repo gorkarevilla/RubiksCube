@@ -16,6 +16,7 @@
 
 package com.gorkarevilla.rubik;
 
+import android.app.Activity;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.view.KeyEvent;
@@ -28,6 +29,8 @@ import android.view.MotionEvent;
  *
  */
 public class VistaCubo extends GLSurfaceView{
+
+	private String _nombreUsuario;
 
 	//El renderizado es el encargado de gestionar el paso de 3D a 2D segun es necesario
 	public RenderizadoCubo _renderizado;
@@ -64,12 +67,16 @@ public class VistaCubo extends GLSurfaceView{
 	//Se almacena la linea en la que se moveria segun las Y (tanto para la cara frontal como para izquierda)
 	private int _lineaY;
 
-
+	//Contexto del Activity
+	private Activity _context;
 
 	/* Constructor Extendido de GLSurfaceView*/
 	public VistaCubo(Context context) {
 		super(context);
+		_context=(Activity) context;
 		_renderizado = new RenderizadoCubo();
+
+
 		setRenderer(_renderizado);
 
 		this.requestFocus();
@@ -129,11 +136,18 @@ public class VistaCubo extends GLSurfaceView{
 
 		}
 
+		
 		//Todos los demas botones realizan su funcion por defecto
 		return super.onKeyDown(keyCode, event);
 
 	}
+	
+	public void crearObjetos(int dimensionCubo, String nombreUsuario) {
 
+		_nombreUsuario = nombreUsuario;
+		_renderizado.crearObjetos(dimensionCubo);
+		
+	}
 
 
 	/**
@@ -198,17 +212,17 @@ public class VistaCubo extends GLSurfaceView{
 			}
 
 
-			
-			
+
+
 			//synchronized(this)
 			queueEvent(new Runnable(){
 				public void run() 
-				
-				
+
+
 				//Creamos un nuevo hilo para no bloquear al principal
 
-			{
-					
+				{
+
 					//Calcula la cara y la linea respecto al esquema.
 					int linea=0;
 					float diferencia=0;
@@ -244,78 +258,81 @@ public class VistaCubo extends GLSurfaceView{
 
 
 				}
-				
+
 			});
-				
-
-
-				_x = event.getX();
-				_y = event.getY();
-			}
-
-			/*
-			 * Cuando se suelta el dedo hay que comprobar si se a girado el cubo o no
-			 */
-			if (event.getAction() == MotionEvent.ACTION_UP) {
-				//Se indica que ya se a levantado el dedo
-
-				
-				//Hacemos una pausa por si el hilo del renderizado no a acabado.
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-				_pulsado=false;
 
 
 
-				//Se ajustan los valores segun la cara a la que se realize el giro
-				int linea=0;
-				if(_cara==0){ //Frontal
-					//La inversa
-					linea=(_renderizado._uncubo._dimension*2)-1-_lineaY;
-				}else if(_cara==1){ //Izquierda
-					linea=_lineaY;
-				}else if(_cara==2){ //Superior
-					linea=_lineaX;
-				}
-
-				float angulo=0;
-
-
-				//Soluciona algunos problemas cuando la linea se buggea
-				if(linea<_renderizado._uncubo._dimension){
-					angulo=_renderizado._uncubo.ajustarReferencias(_cara,linea);
-
-					float angulogirado=angulo-_anguloinicial;
-
-
-					//System.out.println("Angulo Girado: "+angulogirado);
-
-					//Si es distinto de 0 es que a habido movimiento por lo tanto giramos la matriz
-					if(angulogirado!=0)
-					{
-						//Aqui ahi que girar los datos del cubito (matriz) el numero de veces que sea necesario
-						boolean pos=false;
-						if(angulogirado<0)pos=true;
-
-						//Nos dira el numero de veces que tenemos que girar la matriz
-
-						_renderizado._uncubo.girarReferencias(_cara, linea, pos,angulogirado);
-
-
-					}
-
-
-				}
-
-				//_renderizado._uncubo.imprimirReferencias();
-			}
-
-
-			return true;
+			_x = event.getX();
+			_y = event.getY();
 		}
 
+		/*
+		 * Cuando se suelta el dedo hay que comprobar si se a girado el cubo o no
+		 */
+		if (event.getAction() == MotionEvent.ACTION_UP) {
+			//Se indica que ya se a levantado el dedo
+
+
+			//Hacemos una pausa por si el hilo del renderizado no a acabado.
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			_pulsado=false;
+
+
+
+			//Se ajustan los valores segun la cara a la que se realize el giro
+			int linea=0;
+			if(_cara==0){ //Frontal
+				//La inversa
+				linea=(_renderizado._uncubo._dimension*2)-1-_lineaY;
+			}else if(_cara==1){ //Izquierda
+				linea=_lineaY;
+			}else if(_cara==2){ //Superior
+				linea=_lineaX;
+			}
+
+			float angulo=0;
+
+
+			//Soluciona algunos problemas cuando la linea se buggea
+			if(linea<_renderizado._uncubo._dimension){
+				angulo=_renderizado._uncubo.ajustarReferencias(_cara,linea);
+
+				float angulogirado=angulo-_anguloinicial;
+
+
+				//System.out.println("Angulo Girado: "+angulogirado);
+
+				//Si es distinto de 0 es que a habido movimiento por lo tanto giramos la matriz
+				if(angulogirado!=0)
+				{
+					//Aqui ahi que girar los datos del cubito (matriz) el numero de veces que sea necesario
+					boolean pos=false;
+					if(angulogirado<0)pos=true;
+
+					//Nos dira el numero de veces que tenemos que girar la matriz
+
+					_renderizado._uncubo.girarReferencias(_cara, linea, pos,angulogirado);
+
+
+				}
+
+
+			}
+
+			//_renderizado._uncubo.imprimirReferencias();
+		}
+
+
+		return true;
 	}
+
+
+
+
+}

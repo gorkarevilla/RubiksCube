@@ -29,9 +29,9 @@ public class GLCubo extends Cubo{
 	 * Constructor
 	 * 
 	 */
-	public GLCubo()				
+	public GLCubo(int dimension)				
 	{
-
+		super(dimension);
 		int cont=0;
 		for(int i=0;i<_dimension;++i){
 			for(int j=0;j<_dimension;++j){

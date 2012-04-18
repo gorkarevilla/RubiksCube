@@ -2,4 +2,12 @@
 <resources>
     <string name="hello">Hello World, CuboRubik!</string>
     <string name="app_name">Cubo de Rubik</string>
+    <item format="integer" name="dimensiondefecto" type="integer">3</item>
+    <string-array name="dimensiones">
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
+        <item >5</item>
+    </string-array>
 </resources>

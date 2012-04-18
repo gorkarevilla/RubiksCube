@@ -43,8 +43,8 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
     public static float mirarX=0;
     public static float mirarY=0;
 	
-	private boolean _pintarAristas=true;
-	private boolean _pintarColor=true;
+	private boolean _pintarAristas=false;
+	private boolean _pintarColor=false;
 	private boolean _pintarEjes=false;
 	private boolean _pintarTexturas=false;
 	private boolean _pintarMenus=false;
@@ -130,12 +130,7 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
         gl.glFrontFace(GL10.GL_CW); // El del frente es el que este dibujado en sentido a las agujas del reloj
         
         gl.glCullFace(GL10.GL_BACK); // La cara que no se dibuja no se podra ver.
-        
-        _uncubo=new GLCubo();
-        
-        _ejes=new GLEjes();
-        
-        _menu= new GLMenu();
+       
         
     	//FONDO
         // Definimos el color de la mezcla RGB para el fondo de pantalla
@@ -173,6 +168,18 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 		GLU.gluLookAt(gl, _camaraX, _camaraY, _camaraZ, 0, 0, 0, 0, 1, 0); 
 		
 		
+	}
+	
+	
+	public void crearObjetos(int dimensionCubo){
+        _uncubo=new GLCubo(dimensionCubo);
+        
+        _pintarAristas = true;
+        _pintarColor = true;
+        
+        //_ejes=new GLEjes();
+        
+        //_menu= new GLMenu();
 	}
 
 
