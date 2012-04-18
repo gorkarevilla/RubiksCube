@@ -21,7 +21,7 @@ public class Cubo {
 
 
 	//Determina de cuanto es la dimension del cubo
-	protected int _dimension = 3;
+	protected int _dimension;
 
 	/*
 	 * Almacenamos las caras en un array tfridimensional
@@ -39,12 +39,12 @@ public class Cubo {
 	protected float _profundo=2f;
 
 	//Define desde el punto central hasta cada lado el numero de puntos que hay.
-	protected float _parteslado = ((float)_dimension)/2; 
+	protected float _parteslado; 
 
 	//Unidades de medida
-	protected float _ui=_profundo/_dimension;
-	protected float _uj=_alto/_dimension;
-	protected float _uk=_ancho/_dimension;
+	protected float _ui;
+	protected float _uj;
+	protected float _uk;
 
 
 	/*
@@ -91,6 +91,12 @@ public class Cubo {
 	public Cubo (int dimension)
 	{
 		_dimension = dimension;
+		
+		_parteslado = ((float)_dimension)/2;
+		_ui=_profundo/_dimension;
+		_uj=_alto/_dimension;
+		_uk=_ancho/_dimension;
+		
 		_cubos= new GLCubito[_dimension][_dimension][_dimension];
 
 		_ArrayReferenciaCubitos = new ReferenciaCubito[_dimension][_dimension][_dimension];

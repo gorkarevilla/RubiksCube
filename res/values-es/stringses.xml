@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nombre">Nombre</string>
+    <string name="dimension">Dimension</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="usuariodef">Usuario</string>
+    
+</resources>
