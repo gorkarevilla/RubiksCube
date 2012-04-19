@@ -28,6 +28,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class CuboRubik extends Activity {
 
@@ -66,7 +67,7 @@ public class CuboRubik extends Activity {
 
 	protected Dialog onCreateDialog(int id) {
 		final Dialog dialog;
-		Context mContext = getApplicationContext();
+		final Context mContext = getApplicationContext();
 		switch(id) {
 		case DIALOG_MENUPRINCIPAL_ID:
 
@@ -80,14 +81,23 @@ public class CuboRubik extends Activity {
 			Button aceptar = (Button)dialog.findViewById(R.id.buttonAceptar);
 			aceptar.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					Spinner dimensionSpinner = (Spinner)dialog.findViewById(R.id.spinnerDimension);
 					
-					String dimension = dimensionSpinner.getSelectedItem().toString();
+					String dimension = ((Spinner)dialog.findViewById(R.id.spinnerDimension)).getSelectedItem().toString();
 
-					EditText nombre = (EditText)dialog.findViewById(R.id.editNombre);
+					String nombre = ((EditText)dialog.findViewById(R.id.editNombre)).getText().toString();
+					
+		            if (nombre != null && nombre.trim().length() ==0)
+		            {   
 
-					((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre.getText().toString() );
-					dialog.cancel();
+		                Toast toast = Toast.makeText(mContext, getString(R.string.errorusuarionull), Toast.LENGTH_LONG);
+		                toast.show();
+		            } else
+		            {
+						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre);
+						dialog.cancel();
+		            }
+
+
 				}
 			});
 

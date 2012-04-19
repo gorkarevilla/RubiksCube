@@ -15,11 +15,11 @@
 
         <EditText
             android:id="@+id/editNombre"
+            android:hint="@string/usuariodef"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="@string/usuariodef"
             android:layout_toRightOf="@+id/textNombre" >
 
             <requestFocus />

@@ -4,5 +4,6 @@
     <string name="dimension">Dimension</string>
     <string name="aceptar">Aceptar</string>
     <string name="usuariodef">Usuario</string>
+    <string name="errorusuarionull">Usuario vacio, por favor introduce tu nombre de usuario</string>
     
 </resources>
