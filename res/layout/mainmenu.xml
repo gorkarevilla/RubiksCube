@@ -2,53 +2,76 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/relativeLayout1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/textNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editNombre"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
             android:text="@string/nombre"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
             android:id="@+id/editNombre"
-            android:hint="@string/usuariodef"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textNombre" >
+            android:layout_toRightOf="@+id/textDimension"
+            android:hint="@string/usuariodef"
+            android:lines="1" >
 
             <requestFocus />
         </EditText>
-
-        <TextView
-            android:id="@+id/textDimension"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editNombre"
-            android:text="@string/dimension"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
             android:id="@+id/spinnerDimension"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editNombre"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/textDimension"
-            android:layout_toRightOf="@+id/textDimension"
+            android:layout_below="@+id/editNombre"
             android:entries="@array/dimensiones" />
 
+        <TextView
+            android:id="@+id/textDimension"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/spinnerDimension"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/spinnerDimension"
+            android:gravity="center_vertical"
+            android:text="@string/dimension"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
         <Button
-            android:id="@+id/buttonAceptar"
+            android:id="@+id/buttonMontado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textDimension"
+            android:layout_toLeftOf="@+id/textViewCentral"
+            android:text="@string/montado" />
+
+        <Button
+            android:id="@+id/buttonAlAzar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewCentral"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/spinnerDimension"
+            android:text="@string/alazar" />
+
+        <TextView
+            android:id="@+id/textViewCentral"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/spinnerDimension"
             android:layout_centerHorizontal="true"
-            android:text="@string/aceptar" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
     </RelativeLayout>

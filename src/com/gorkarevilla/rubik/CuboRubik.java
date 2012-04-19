@@ -32,9 +32,13 @@ import android.widget.Toast;
 
 public class CuboRubik extends Activity {
 
-	private final static int DIALOG_MENUPRINCIPAL_ID = 0;
-	private final static int DIALOG_MENUPAUSA_ID = 1;
+	//TIPOS DE MENUS
+	public final static int DIALOG_MENUPRINCIPAL_ID = 0;
+	public final static int DIALOG_MENUPAUSA_ID = 1;
 
+	//MODOS DE JUEGO
+	public final static int MONTADO = 0;
+	public final static int AZAR = 1;
 
 
 
@@ -60,7 +64,7 @@ public class CuboRubik extends Activity {
 		setContentView(_vista);
 
 
-		
+
 
 	}
 
@@ -75,27 +79,51 @@ public class CuboRubik extends Activity {
 			dialog.setContentView(R.layout.mainmenu);
 			dialog.setTitle("Menu Principal");
 			dialog.show();
-			
-			
-			//Boton Aceptar
-			Button aceptar = (Button)dialog.findViewById(R.id.buttonAceptar);
-			aceptar.setOnClickListener(new OnClickListener() {
+
+
+			//Boton Cubo Montado
+			Button montado = (Button)dialog.findViewById(R.id.buttonMontado);
+			montado.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					
+
 					String dimension = ((Spinner)dialog.findViewById(R.id.spinnerDimension)).getSelectedItem().toString();
 
 					String nombre = ((EditText)dialog.findViewById(R.id.editNombre)).getText().toString();
-					
-		            if (nombre != null && nombre.trim().length() ==0)
-		            {   
 
-		                Toast toast = Toast.makeText(mContext, getString(R.string.errorusuarionull), Toast.LENGTH_LONG);
-		                toast.show();
-		            } else
-		            {
-						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre);
+					if (nombre != null && nombre.trim().length() ==0)
+					{   
+
+						Toast toast = Toast.makeText(mContext, getString(R.string.errorusuarionull), Toast.LENGTH_LONG);
+						toast.show();
+					} else
+					{
+						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre, MONTADO);
 						dialog.cancel();
-		            }
+					}
+
+
+				}
+			});
+
+			//Boton Al azar
+			Button alAzar = (Button)dialog.findViewById(R.id.buttonAlAzar);
+			alAzar.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+
+					String dimension = ((Spinner)dialog.findViewById(R.id.spinnerDimension)).getSelectedItem().toString();
+
+					String nombre = ((EditText)dialog.findViewById(R.id.editNombre)).getText().toString();
+
+					if (nombre != null && nombre.trim().length() ==0)
+					{   
+
+						Toast toast = Toast.makeText(mContext, getString(R.string.errorusuarionull), Toast.LENGTH_LONG);
+						toast.show();
+					} else
+					{
+						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre, AZAR);
+						dialog.cancel();
+					}
 
 
 				}
@@ -104,9 +132,42 @@ public class CuboRubik extends Activity {
 			break;
 		case DIALOG_MENUPAUSA_ID:
 
-			dialog = new Dialog(mContext);
+			dialog = new Dialog(this);
 
-			// do the work to define the game over Dialog
+			dialog.setContentView(R.layout.optionmenu);
+			dialog.setTitle("Opciones");
+			dialog.show();
+
+			//Boton Continuar
+			Button continuar = (Button)dialog.findViewById(R.id.buttonContinuar);
+			continuar.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					dialog.cancel();
+				}
+
+			});
+			
+			
+			//Boton Juego Nuevo
+			Button juegoNuevo = (Button)dialog.findViewById(R.id.buttonJuegoNuevo);
+			juegoNuevo.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					dialog.cancel();
+					showDialog(DIALOG_MENUPRINCIPAL_ID);
+				}
+
+			});
+			
+			//Boton Salir
+			Button salir = (Button)dialog.findViewById(R.id.buttonSalir);
+			salir.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					finish();
+				}
+
+			});
+
+			
 			break;
 		default:
 			dialog = null;
@@ -127,7 +188,7 @@ public class CuboRubik extends Activity {
 		// to take appropriate action when the activity looses focus
 		super.onResume();
 		_vista.onResume();
-		
+
 		showDialog(DIALOG_MENUPRINCIPAL_ID);
 
 

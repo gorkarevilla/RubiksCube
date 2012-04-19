@@ -5,5 +5,10 @@
     <string name="aceptar">Aceptar</string>
     <string name="usuariodef">Usuario</string>
     <string name="errorusuarionull">Usuario vacio, por favor introduce tu nombre de usuario</string>
+    <string name="montado">Montado!</string>
+    <string name="alazar">Al Azar!</string>
+    <string name="juegonuevo">Juego Nuevo</string>
+    <string name="continuar">Continuar</string>
+    <string name="salir">Salir</string>
     
 </resources>

@@ -94,6 +94,7 @@ public class VistaCubo extends GLSurfaceView{
 	public void onPause() {
 
 		System.out.println("Menu Pausa");
+		
 		//_renderizado._menu._height=this.getHeight();
 		//_renderizado._menu._width=this.getWidth();
 	}
@@ -110,9 +111,9 @@ public class VistaCubo extends GLSurfaceView{
 			//De momento no tiene opciones
 			System.out.println("Opciones!");
 
-
+			
 			//Debera de abrir el menu de opciones
-
+			_context.showDialog(CuboRubik.DIALOG_MENUPAUSA_ID);
 		}
 
 		/*
@@ -120,10 +121,12 @@ public class VistaCubo extends GLSurfaceView{
 		 */
 		if(event.getKeyCode()==KeyEvent.KEYCODE_BACK){
 			System.out.println("Salir!");
+			
+			_context.showDialog(CuboRubik.DIALOG_MENUPAUSA_ID);
 			onPause();
 
 			//Si es true no realizara nada mas, si es false realizara lo que normalmente hace (salir del programa)
-			return false;
+			return true;
 		}
 
 		/*
@@ -142,10 +145,11 @@ public class VistaCubo extends GLSurfaceView{
 
 	}
 	
-	public void crearObjetos(int dimensionCubo, String nombreUsuario) {
+	public void crearObjetos(int dimensionCubo, String nombreUsuario, int modo) {
 
 		_nombreUsuario = nombreUsuario;
-		_renderizado.crearObjetos(dimensionCubo);
+		_renderizado.crearObjetos(dimensionCubo, modo);
+		
 		
 	}
 
