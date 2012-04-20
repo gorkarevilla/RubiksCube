@@ -147,8 +147,16 @@ public class VistaCubo extends GLSurfaceView{
 	
 	public void crearObjetos(int dimensionCubo, String nombreUsuario, int modo) {
 
-		_nombreUsuario = nombreUsuario;
-		_renderizado.crearObjetos(dimensionCubo, modo);
+		if(modo == CuboRubik.MONTADO)
+		{
+			_nombreUsuario = nombreUsuario;
+			_renderizado.crearObjetos(dimensionCubo, modo);
+		}
+		else if( modo ==CuboRubik.AZAR)
+		{
+			_nombreUsuario = nombreUsuario;
+		}
+
 		
 		
 	}

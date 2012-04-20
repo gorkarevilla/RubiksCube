@@ -19,8 +19,11 @@ package com.gorkarevilla.rubik;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnKeyListener;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -79,6 +82,17 @@ public class CuboRubik extends Activity {
 			dialog.setContentView(R.layout.mainmenu);
 			dialog.setTitle("Menu Principal");
 			dialog.show();
+			
+			dialog.setOnKeyListener(new OnKeyListener() {
+
+				@Override
+				public boolean onKey(DialogInterface arg0, int arg1,
+						KeyEvent arg2) {
+					// Se pone a true para que no realize ninguna accion al pulsar algun boton
+					return true;
+				}
+				
+			});
 
 
 			//Boton Cubo Montado
@@ -122,7 +136,7 @@ public class CuboRubik extends Activity {
 					} else
 					{
 						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre, AZAR);
-						dialog.cancel();
+						//dialog.cancel();
 					}
 
 
