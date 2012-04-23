@@ -36,6 +36,10 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 	private GLEjes _ejes;
 	public GLMenu _menu;
 	
+	//Tamanyo pantalla
+	private int _width;
+	private int _height;
+	
 	private int labelNombre;
 	private int labelTiempo;
 	
@@ -49,14 +53,20 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
     private static float _camaraY=3f; //2.33 con 0.7 de tamanyo de cubo
     private static float _camaraZ=6f; //3.5 con 0.7 de tamanyo de cubo
     
+    //Definicion del punto desde donde se situara la camara trasera
+    private static float _camaraTraseraX=-_camaraX; //3.3 con 0.7 de tamanyo de cubo
+    private static float _camaraTraseraY=-_camaraY; //2.33 con 0.7 de tamanyo de cubo
+    private static float _camaraTraseraZ=-_camaraZ; //3.5 con 0.7 de tamanyo de cubo
+    
     public static float mirarX=0;
     public static float mirarY=0;
 	
 	private boolean _pintarAristas=false;
 	private boolean _pintarColor=false;
-	private boolean _pintarEjes=false;
+	private boolean _pintarEjes=true;
 	private boolean _pintarTexturas=false;
 	private boolean _pintarMenus=false;
+	private boolean _camaratrasera=true;
 	
 	/**
 	 * 
@@ -68,6 +78,27 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 	 */
 	public void onDrawFrame(GL10 gl) {
 
+		/*
+		 * Camara delantera
+		 */
+		gl.glViewport(0, 0, _width, _height);
+		
+        // Se ajusta el ratio segun el tamanyo de la pantalla
+        float ratio = (float) _width / _height;
+        
+        
+        //Se carga la matriz de proyeccion
+        gl.glMatrixMode(GL10.GL_PROJECTION);       
+        
+        //Se resetea la matriz identidad
+        gl.glLoadIdentity();                       
+        
+        //Se aplica la matriz de proyeccion
+        gl.glFrustumf(-ratio, ratio, -1, 1, 3, 70);
+        
+		RenderizadoCubo.situarCamara(gl,true);
+		
+		
 		//Se cambia a la matriz para ver modelos
 		gl.glMatrixMode(GL10.GL_MODELVIEW);      
 		
@@ -81,9 +112,57 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
         
         if(_pintarTexturas)_uncubo.pintarTexturas(gl);
         
-        if(_pintarEjes)_ejes.pintarEjes(gl,true,true,true);
+        if(_pintarEjes && _ejes!=null)_ejes.pintarEjes(gl,true,true,true);
         
-        if(_pintarMenus)_menu.pintarMenu(gl);
+        if(_pintarMenus && _menu!=null)_menu.pintarMenu(gl);
+ 
+        
+        
+        
+		if(_camaratrasera)
+		{
+			/*
+			 * Camara Trasera
+			 */
+			
+			gl.glViewport(_width/2, (int) (_height*0.6), _width/2 , _height/2);
+			
+	        // Se ajusta el ratio segun el tamanyo de la pantalla
+	        ratio = (float) (_width) / (_height);
+
+	        
+	        //Se carga la matriz de proyeccion
+	        gl.glMatrixMode(GL10.GL_PROJECTION);       
+	        
+	        //Se resetea la matriz identidad
+	        gl.glLoadIdentity();                       
+	        
+	        //Se aplica la matriz de proyeccion
+	        gl.glFrustumf(-ratio, ratio, -1, 1, 3, 70);
+	        
+			RenderizadoCubo.situarCamara(gl,false);
+			
+			
+			/*
+			 * Cambios
+			 */
+			
+			//Se cambia a la matriz para ver modelos
+			gl.glMatrixMode(GL10.GL_MODELVIEW);      
+			
+
+	        //Dibujamos lo que sea necesario
+	        if(_pintarAristas)_uncubo.pintarAristas(gl);
+	        
+	        if(_pintarColor)_uncubo.pintarColor(gl);
+	        
+	        if(_pintarTexturas)_uncubo.pintarTexturas(gl);
+	        
+	        if(_pintarEjes && _ejes!=null)_ejes.pintarEjes(gl,true,true,true);
+	        
+	        if(_pintarMenus && _menu!=null)_menu.pintarMenu(gl);
+		}
+
         
 
 	}
@@ -101,22 +180,9 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 	 */
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
 		
-		
-		gl.glViewport(0, 0, width, height);
-		
-        // Se ajusta el ratio segun el tamanyo de la pantalla
-        float ratio = (float) width / height;
-        
-        //Se carga la matriz de proyeccion
-        gl.glMatrixMode(GL10.GL_PROJECTION);       
-        
-        //Se resetea la matriz identidad
-        gl.glLoadIdentity();                       
-        
-        //Se aplica la matriz de proyeccion
-        gl.glFrustumf(-ratio, ratio, -1, 1, 3, 70);
-        
-		RenderizadoCubo.situarCamara(gl);
+		_width =width;
+		_height = height;
+
         
 	}
 
@@ -132,7 +198,6 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 	 * @see android.opengl.GLSurfaceView.Renderer#onSurfaceCreated(javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.egl.EGLConfig)
 	 */
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-
 		
         gl.glEnable(GL10.GL_CULL_FACE); // habilitar la cara que se muestra.
         
@@ -163,8 +228,9 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 	 * desde los objetos que necesiten dibujarse antes de dibujarse.
 	 * 
 	 * @param gl
+	 * @param delantera indica si la camara es la delantera o la trasera
 	 */
-	public static void situarCamara(GL10 gl){
+	public static void situarCamara(GL10 gl, boolean delantera){
 		//Habilitamos el poder ver delante el objeto que tiene el z menos profundo, osea el mas cercano
 		gl.glEnable(GL10.GL_DEPTH_TEST);
 		
@@ -174,8 +240,16 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 		//Se carga la matriz identidad
 		gl.glLoadIdentity();
 
-		//Se situa la camara para que mire al punto(0,0,0) siendo el vector que indica la parte superior de la camara el (0,1,0)
-		GLU.gluLookAt(gl, _camaraX, _camaraY, _camaraZ, 0, 0, 0, 0, 1, 0); 
+		if(delantera)
+		{
+			//Se situa la camara para que mire al punto(0,0,0) siendo el vector que indica la parte superior de la camara el (0,1,0)
+			GLU.gluLookAt(gl, _camaraX, _camaraY, _camaraZ, 0, 0, 0, 0, 1, 0); 
+		}
+		else
+		{
+			GLU.gluLookAt(gl, _camaraTraseraX, _camaraTraseraY, _camaraTraseraZ, 0, 0, 0, 0, 1, 0); 
+		}
+			 
 		
 		
 	}
@@ -190,9 +264,9 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 	        _pintarAristas = true;
 	        _pintarColor = true;
 	        
-	        //_ejes=new GLEjes();
+	        _ejes=new GLEjes();
 	        
-	        //_menu= new GLMenu();
+	        _menu= new GLMenu();
 			
 		} else if(modo == CuboRubik.AZAR)
 		{
@@ -201,9 +275,9 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 	        _pintarAristas = true;
 	        _pintarColor = true;
 	        
-	        //_ejes=new GLEjes();
+	        _ejes=new GLEjes();
 	        
-	        //_menu= new GLMenu();
+	        _menu= new GLMenu();
 		}
 
 	}

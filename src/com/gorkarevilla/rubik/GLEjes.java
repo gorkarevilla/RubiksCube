@@ -83,7 +83,7 @@ public class GLEjes {
 	public void pintarEjes(GL10 gl, boolean pintarX, boolean pintarY, boolean pintarZ)
 	{
 		
-		RenderizadoCubo.situarCamara(gl);
+		RenderizadoCubo.situarCamara(gl,true);
 		  
 		if(pintarX)
 		{
