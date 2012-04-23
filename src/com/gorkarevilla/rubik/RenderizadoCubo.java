@@ -186,7 +186,14 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 			
 		} else if(modo == CuboRubik.AZAR)
 		{
-			
+	        _uncubo=new GLCubo(dimensionCubo);
+	        
+	        _pintarAristas = true;
+	        _pintarColor = true;
+	        
+	        //_ejes=new GLEjes();
+	        
+	        //_menu= new GLMenu();
 		}
 
 	}

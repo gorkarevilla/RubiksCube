@@ -69,6 +69,9 @@ public class VistaCubo extends GLSurfaceView{
 
 	//Contexto del Activity
 	private Activity _context;
+	
+	//MOVIMIENTOS QUE SE REALIZAN AL AZAR: ENTRE 10-110
+	private int _numeroMovimientosAzar;
 
 	/* Constructor Extendido de GLSurfaceView*/
 	public VistaCubo(Context context) {
@@ -155,6 +158,33 @@ public class VistaCubo extends GLSurfaceView{
 		else if( modo ==CuboRubik.AZAR)
 		{
 			_nombreUsuario = nombreUsuario;
+			_renderizado.crearObjetos(dimensionCubo, modo);
+			
+			_numeroMovimientosAzar= (int) (10+Math.random()*100);
+			
+			System.out.println("Movimientos: "+_numeroMovimientosAzar);
+			
+			for(int i=0;i<_numeroMovimientosAzar;++i)
+			{
+				//Caras son 0, 1 o 2
+				int cara = (int)(Math.random()*3 );
+				
+				//Linea son de 0 a _dimensionCubo-1
+				int linea = (int)(Math.random()*_renderizado._uncubo._dimension);
+				
+				//Pos True o False
+				int temppos = (int)(Math.random()*2 );
+				boolean pos=true;
+				if(temppos==0) pos=false;
+				
+				//Angulo Girado 0,90,180,270
+				int angulogirado = (int)(Math.random()*4 ); //0,1,2,3
+				angulogirado = angulogirado*90;
+				_renderizado._uncubo.girarReferencias(cara, linea, pos,angulogirado);
+			}
+				
+			
+
 		}
 
 		

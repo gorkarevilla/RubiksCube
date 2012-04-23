@@ -136,7 +136,7 @@ public class CuboRubik extends Activity {
 					} else
 					{
 						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre, AZAR);
-						//dialog.cancel();
+						dialog.cancel();
 					}
 
 
