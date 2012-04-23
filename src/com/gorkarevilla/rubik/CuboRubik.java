@@ -89,7 +89,8 @@ public class CuboRubik extends Activity {
 				public boolean onKey(DialogInterface arg0, int arg1,
 						KeyEvent arg2) {
 					// Se pone a true para que no realize ninguna accion al pulsar algun boton
-					return true;
+					if( ((VistaCubo)_vista).getRender()._uncubo==null ) return true;
+					else return false;
 				}
 				
 			});
@@ -203,7 +204,10 @@ public class CuboRubik extends Activity {
 		super.onResume();
 		_vista.onResume();
 
-		showDialog(DIALOG_MENUPRINCIPAL_ID);
+		if( ((VistaCubo)_vista).getRender()._uncubo==null ) showDialog(DIALOG_MENUPRINCIPAL_ID);
+		else showDialog(DIALOG_MENUPAUSA_ID);
+		
+		
 
 
 

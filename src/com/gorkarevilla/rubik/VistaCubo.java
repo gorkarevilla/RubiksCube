@@ -373,6 +373,11 @@ public class VistaCubo extends GLSurfaceView{
 
 		return true;
 	}
+	
+	public RenderizadoCubo getRender()
+	{
+		return _renderizado;
+	}
 
 
 
