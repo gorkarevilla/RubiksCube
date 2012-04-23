@@ -23,13 +23,16 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnKeyListener;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -64,9 +67,11 @@ public class CuboRubik extends Activity {
 		//Creamos la pantalla y la cargamos.
 		_vista = new VistaCubo(this);
 
+		
+		
 		setContentView(_vista);
-
-
+		
+	
 
 
 	}
@@ -89,7 +94,7 @@ public class CuboRubik extends Activity {
 				public boolean onKey(DialogInterface arg0, int arg1,
 						KeyEvent arg2) {
 					// Se pone a true para que no realize ninguna accion al pulsar algun boton
-					if( ((VistaCubo)_vista).getRender()._uncubo==null ) return true;
+					if( ((VistaCubo)_vista)._renderizado._uncubo==null ) return true;
 					else return false;
 				}
 				
@@ -136,6 +141,8 @@ public class CuboRubik extends Activity {
 						toast.show();
 					} else
 					{
+						
+						
 						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre, AZAR);
 						dialog.cancel();
 					}
@@ -204,7 +211,7 @@ public class CuboRubik extends Activity {
 		super.onResume();
 		_vista.onResume();
 
-		if( ((VistaCubo)_vista).getRender()._uncubo==null ) showDialog(DIALOG_MENUPRINCIPAL_ID);
+		if( ((VistaCubo)_vista)._renderizado._uncubo==null ) showDialog(DIALOG_MENUPRINCIPAL_ID);
 		else showDialog(DIALOG_MENUPAUSA_ID);
 		
 		
