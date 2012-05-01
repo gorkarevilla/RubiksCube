@@ -19,8 +19,8 @@ package com.gorkarevilla.rubik;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.opengl.GLSurfaceView;
+//import android.graphics.BitmapFactory;
+//import android.opengl.GLSurfaceView;
 
 /**
  * La Cara puede ser de 6 colores diferentes:
@@ -44,6 +44,7 @@ public class GLCara extends Cara{
 
 	private boolean _cargarTextura=false;
 
+	@SuppressWarnings("unused")
 	private Bitmap _bitmap;
 
 

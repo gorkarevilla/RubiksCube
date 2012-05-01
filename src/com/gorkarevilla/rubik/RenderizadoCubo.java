@@ -19,19 +19,12 @@ package com.gorkarevilla.rubik;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
-import android.opengl.GLUtils;
-import android.os.SystemClock;
 
 public class RenderizadoCubo implements GLSurfaceView.Renderer{
 
+	
 	public GLCubo _uncubo;
 	private GLEjes _ejes;
 	public GLMenu _menu;
@@ -40,8 +33,8 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 	private int _width;
 	private int _height;
 	
-	private int labelNombre;
-	private int labelTiempo;
+//	private int labelNombre;
+//	private int labelTiempo;
 	
     //PALETA RGB (Red, Green, Blue) para el fondo
     private float _rojo = 0.5f;

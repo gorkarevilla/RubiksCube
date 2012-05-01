@@ -23,8 +23,7 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/textDimension"
             android:hint="@string/usuariodef"
-            android:text="HOLA"
-            android:lines="1" >
+            android:inputType="textWebEditText" >
 
             <requestFocus />
         </EditText>

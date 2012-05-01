@@ -26,13 +26,13 @@ import java.nio.ShortBuffer;
 
 public class Cara {
 
-	public static final int CUBITOAMARILLO=R.drawable.rojo;
-	public static final int CUBITOAZUL=R.drawable.rojo;
-	public static final int CUBITOVERDE=R.drawable.rojo;
-	public static final int CUBITOBLANCO=R.drawable.rojo;
-	public static final int CUBITOROJO=R.drawable.rojo;
-	public static final int CUBITOROSA=R.drawable.rojo;
-	public static final int CUBITONEGRO=R.drawable.rojo;
+	public final int CUBITOAMARILLO=R.drawable.rojo;
+	public final int CUBITOAZUL=R.drawable.rojo;
+	public final int CUBITOVERDE=R.drawable.rojo;
+	public final int CUBITOBLANCO=R.drawable.rojo;
+	public final int CUBITOROJO=R.drawable.rojo;
+	public final int CUBITOROSA=R.drawable.rojo;
+	public final int CUBITONEGRO=R.drawable.rojo;
 
 	//Variables para almacenar la paleta RGBA
 	protected float _rojo;
@@ -77,6 +77,7 @@ public class Cara {
 	protected int _numeroVerticesA = 8;
 
 
+
 	public Cara(int color,float[] vertices){
 
 		setVerticesCara(vertices);
@@ -89,7 +90,7 @@ public class Cara {
 			_verde=1f;
 			_azul=0f;
 			_alpha=1f;
-			_img=this. CUBITOAMARILLO;
+			_img=this.CUBITOAMARILLO;
 		}
 		//Azul
 		else if (color==1){
@@ -97,7 +98,7 @@ public class Cara {
 			_verde=0f;
 			_azul=1f;
 			_alpha=1f;
-			_img=this. CUBITOAZUL;
+			_img=this.CUBITOAZUL;
 		}
 		//Verde
 		else if (color==2){
@@ -105,7 +106,7 @@ public class Cara {
 			_verde=1f;
 			_azul=0f;
 			_alpha=1f;
-			_img=this. CUBITOVERDE;
+			_img=this.CUBITOVERDE;
 		}
 		//Blanco
 		else if (color==3){
@@ -113,7 +114,7 @@ public class Cara {
 			_verde=1f;
 			_azul=1f;
 			_alpha=1f;
-			_img=this. CUBITOBLANCO;
+			_img=this.CUBITOBLANCO;
 		}
 		//Rojo
 		else if (color==4){
@@ -121,7 +122,7 @@ public class Cara {
 			_verde=0f;
 			_azul=0f;
 			_alpha=1f;
-			_img=this. CUBITOROJO;
+			_img=this.CUBITOROJO;
 		}
 		//Rosa
 		else if (color==5){
@@ -129,7 +130,7 @@ public class Cara {
 			_verde=0f;
 			_azul=1f;
 			_alpha=1f;
-			_img=this. CUBITOROSA;
+			_img=this.CUBITOROSA;
 		}
 		//Negro
 		else if (color==6){
@@ -137,7 +138,7 @@ public class Cara {
 			_verde=0f;
 			_azul=0f;
 			_alpha=1f;
-			_img=this. CUBITONEGRO;
+			_img=this.CUBITONEGRO;
 		}
 
 		

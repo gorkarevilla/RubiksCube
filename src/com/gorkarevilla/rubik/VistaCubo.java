@@ -30,6 +30,7 @@ import android.view.MotionEvent;
  */
 public class VistaCubo extends GLSurfaceView{
 
+	@SuppressWarnings("unused")
 	private String _nombreUsuario;
 
 	//El renderizado es el encargado de gestionar el paso de 3D a 2D segun es necesario
