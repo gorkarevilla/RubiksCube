@@ -10,5 +10,7 @@
     <string name="juegonuevo">Juego Nuevo</string>
     <string name="continuar">Continuar</string>
     <string name="salir">Salir</string>
+    <string name="opciones">Opciones</string>
+    <string name="activarEspejo">Activar Espejo</string>
     
 </resources>

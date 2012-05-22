@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnKeyListener;
+import android.content.SharedPreferences;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -29,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -38,11 +40,17 @@ public class CuboRubik extends Activity {
 	//TIPOS DE MENUS
 	public final static int DIALOG_MENUPRINCIPAL_ID = 0;
 	public final static int DIALOG_MENUPAUSA_ID = 1;
+	public final static int DIALOG_MENUOPCIONES_ID = 2;
 
 	//MODOS DE JUEGO
 	public final static int MONTADO = 0;
 	public final static int AZAR = 1;
 
+	//OPCIONES DEL PROGRAMA
+	public static final String OPCIONES = "OpcionesRubik";
+	private int _dimensionCubo;
+	private String _nombreUsuario;
+	private boolean _espejoActivado;
 
 
 	//Vista por defecto del cubo
@@ -54,6 +62,15 @@ public class CuboRubik extends Activity {
 
 		super.onCreate(savedInstanceState);
 
+
+
+		// Cargar Preferencias almacenadas
+		SharedPreferences preferencias = getSharedPreferences(OPCIONES, 0);
+		_dimensionCubo = preferencias.getInt("DimensionCubo", 3);
+		_nombreUsuario = preferencias.getString("NombreUsuario", null);
+		_espejoActivado = preferencias.getBoolean("EspejoActivado", true);
+
+		
 		// Quitamos el titulo
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -64,11 +81,11 @@ public class CuboRubik extends Activity {
 		//Creamos la pantalla y la cargamos.
 		_vista = new VistaCubo(this);
 
-		
-		
+
+
 		setContentView(_vista);
-		
-	
+
+
 
 
 	}
@@ -84,19 +101,30 @@ public class CuboRubik extends Activity {
 			dialog.setContentView(R.layout.mainmenu);
 			dialog.setTitle("Menu Principal");
 			dialog.show();
+
 			
 			dialog.setOnKeyListener(new OnKeyListener() {
 
 				@Override
 				public boolean onKey(DialogInterface arg0, int arg1,
-						KeyEvent arg2) {
-					// Se pone a true para que no realize ninguna accion al pulsar algun boton
-					if( ((VistaCubo)_vista)._renderizado._uncubo==null ) return true;
-					else return false;
+						KeyEvent key) {
+					// Evitamos que si el cubo no esta creado, al puksar back no cierre el dialog.
+					if (key.getKeyCode()==key.KEYCODE_BACK){
+						if( ((VistaCubo)_vista)._renderizado._uncubo==null ) return true;
+					}
+					
+					return false;
 				}
-				
-			});
 
+			});
+			
+			//EditText del Nombre cargado de opciones (Anterior)
+			EditText nombre = (EditText)dialog.findViewById(R.id.editNombre);
+			nombre.setText(_nombreUsuario);
+			
+			//El spinner de la dimension carga de opciones su valor anterior.
+			Spinner dimension = (Spinner)dialog.findViewById(R.id.spinnerDimension);
+			dimension.setSelection(_dimensionCubo-1);
 
 			//Boton Cubo Montado
 			Button montado = (Button)dialog.findViewById(R.id.buttonMontado);
@@ -114,7 +142,7 @@ public class CuboRubik extends Activity {
 						toast.show();
 					} else
 					{
-						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre, MONTADO);
+						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre, MONTADO,_espejoActivado);
 						dialog.cancel();
 					}
 
@@ -138,9 +166,9 @@ public class CuboRubik extends Activity {
 						toast.show();
 					} else
 					{
-						
-						
-						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre, AZAR);
+
+
+						((VistaCubo)_vista).crearObjetos( Integer.parseInt(dimension), nombre, AZAR,_espejoActivado);
 						dialog.cancel();
 					}
 
@@ -153,8 +181,8 @@ public class CuboRubik extends Activity {
 
 			dialog = new Dialog(this);
 
-			dialog.setContentView(R.layout.optionmenu);
-			dialog.setTitle("Opciones");
+			dialog.setContentView(R.layout.pausemenu);
+			dialog.setTitle("Pausa");
 			dialog.show();
 
 			//Boton Continuar
@@ -165,8 +193,8 @@ public class CuboRubik extends Activity {
 				}
 
 			});
-			
-			
+
+
 			//Boton Juego Nuevo
 			Button juegoNuevo = (Button)dialog.findViewById(R.id.buttonJuegoNuevo);
 			juegoNuevo.setOnClickListener(new OnClickListener() {
@@ -176,7 +204,19 @@ public class CuboRubik extends Activity {
 				}
 
 			});
-			
+
+
+			//Boton Opciones
+			Button opciones = (Button)dialog.findViewById(R.id.buttonOpciones);
+			opciones.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					//dialog.cancel();
+					showDialog(DIALOG_MENUOPCIONES_ID);
+				}
+
+			});
+
+
 			//Boton Salir
 			Button salir = (Button)dialog.findViewById(R.id.buttonSalir);
 			salir.setOnClickListener(new OnClickListener() {
@@ -186,11 +226,34 @@ public class CuboRubik extends Activity {
 
 			});
 
-			
+
 			break;
+
+		case DIALOG_MENUOPCIONES_ID:
+
+			dialog = new Dialog(this);
+
+			dialog.setContentView(R.layout.optionmenu);
+			dialog.setTitle("Opciones");
+			dialog.show();
+
+			//Check Habilitar Espejo
+			CheckBox espejo = (CheckBox)dialog.findViewById(R.id.checkActivarEspejo);
+			espejo.setChecked(_espejoActivado);
+			espejo.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					((VistaCubo) _vista)._renderizado.toggleCamaraTrasera();
+				}
+
+			});
+
+			break;
+
+
 		default:
 			dialog = null;
 		}
+
 		return dialog;
 	}
 
@@ -210,8 +273,8 @@ public class CuboRubik extends Activity {
 
 		if( ((VistaCubo)_vista)._renderizado._uncubo==null ) showDialog(DIALOG_MENUPRINCIPAL_ID);
 		else showDialog(DIALOG_MENUPAUSA_ID);
-		
-		
+
+
 
 
 
@@ -224,5 +287,23 @@ public class CuboRubik extends Activity {
 		super.onPause();
 		_vista.onPause();
 	}
+	
+    @Override
+    protected void onStop(){
+       super.onStop();
+
+      // Editamos las opciones
+      SharedPreferences preferencias = getSharedPreferences(OPCIONES, 0);
+      SharedPreferences.Editor editor = preferencias.edit();
+      editor.putInt("DimensionCubo", ((VistaCubo)_vista)._renderizado._uncubo._dimension);
+      editor.putString("NombreUsuario", ((VistaCubo)_vista)._nombreUsuario);
+      editor.putBoolean("EspejoActivado", ((VistaCubo)_vista)._renderizado._camaratrasera);
+      System.out.println("Dim: "+((VistaCubo)_vista)._renderizado._uncubo._dimension);
+      System.out.println("Nombre: "+((VistaCubo)_vista)._nombreUsuario);
+      System.out.println("Espejo: "+ ((VistaCubo)_vista)._renderizado._uncubo._dimension);
+      // Las almacenamos
+      editor.commit();
+    }
+
 
 }

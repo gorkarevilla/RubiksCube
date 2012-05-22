@@ -30,8 +30,8 @@ import android.view.MotionEvent;
  */
 public class VistaCubo extends GLSurfaceView{
 
-	@SuppressWarnings("unused")
-	private String _nombreUsuario;
+	//Nombre del jugador
+	public String _nombreUsuario;
 
 	//El renderizado es el encargado de gestionar el paso de 3D a 2D segun es necesario
 	public RenderizadoCubo _renderizado;
@@ -149,17 +149,21 @@ public class VistaCubo extends GLSurfaceView{
 
 	}
 	
-	public void crearObjetos(int dimensionCubo, String nombreUsuario, int modo) {
+	
+	
+	public void crearObjetos(int dimensionCubo, String nombreUsuario, int modo, Boolean espejoActivado) {
 
 		if(modo == CuboRubik.MONTADO)
 		{
 			_nombreUsuario = nombreUsuario;
 			_renderizado.crearObjetos(dimensionCubo, modo);
+			_renderizado._camaratrasera=espejoActivado;
 		}
 		else if( modo ==CuboRubik.AZAR)
 		{
 			_nombreUsuario = nombreUsuario;
 			_renderizado.crearObjetos(dimensionCubo, modo);
+			_renderizado._camaratrasera=espejoActivado;
 			
 			_numeroMovimientosAzar= (int) (10+Math.random()*100);
 			

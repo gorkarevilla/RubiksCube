@@ -54,12 +54,12 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
     public static float mirarX=0;
     public static float mirarY=0;
 	
-	private boolean _pintarAristas=false;
-	private boolean _pintarColor=false;
-	private boolean _pintarEjes=true;
-	private boolean _pintarTexturas=false;
-	private boolean _pintarMenus=false;
-	private boolean _camaratrasera=true;
+	public boolean _pintarAristas=false;
+	public boolean _pintarColor=false;
+	public boolean _pintarEjes=true;
+	public boolean _pintarTexturas=false;
+	public boolean _pintarMenus=false;
+	public boolean _camaratrasera=true;
 	
 	/**
 	 * 
@@ -273,6 +273,14 @@ public class RenderizadoCubo implements GLSurfaceView.Renderer{
 	        _menu= new GLMenu();
 		}
 
+	}
+	
+	
+	/**
+	 * Activa o desactiva la camara trasera, si esta activa la pone desactivada y viceversa.
+	 */
+	public void toggleCamaraTrasera(){
+		this._camaratrasera = !this._camaratrasera;
 	}
 	
 
