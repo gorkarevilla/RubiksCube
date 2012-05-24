@@ -1,3 +1,4 @@
 Cubo de Rubik para dispositivos Android 2.1 y superiores.
 
+-Posibilidad de elegir el numero de lados del cubo (1..5)
 -Graficos 3D mediante OpenGL.
