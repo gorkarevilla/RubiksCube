@@ -105,7 +105,6 @@ public class CuboRubik extends Activity {
 			
 			dialog.setOnKeyListener(new OnKeyListener() {
 
-				@Override
 				public boolean onKey(DialogInterface arg0, int arg1,
 						KeyEvent key) {
 					// Evitamos que si el cubo no esta creado, al puksar back no cierre el dialog.
